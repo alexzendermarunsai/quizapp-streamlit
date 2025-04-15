@@ -93,7 +93,8 @@ if st.session_state.questions is None:
     else: st.error("FATAL ERROR: Cannot load question bank. Aborting operation."); st.stop()
 questions = st.session_state.questions; total_questions = st.session_state.total_questions; current_index = st.session_state.current_question_index; score = st.session_state.score; results = st.session_state.results
 if total_questions == 0: st.error("ERROR: No valid questions found in source.");
-if st.button("🔄 Attempt Re-init"): reset_quiz(); st.stop()
+
+#if st.button("🔄 Attempt Re-init"): reset_quiz(); st.stop()
 
 # --- Sidebar ---
 with st.sidebar:
