@@ -1,39 +1,55 @@
 import streamlit as st
 import json
 import os
+import html # Required for escaping explanation text
 
 # --- Configuration ---
 JSON_FILE = 'questions_bank.json'
 
 # --- Functions ---
-# ... (load_questions, initialize_state, reset_quiz, parse_correct_answer functions remain the same) ...
 @st.cache_data
 def load_questions(filename):
-    if not os.path.exists(filename) or not os.path.isfile(filename): st.error(f"Error: File '{filename}' not found."); return None
+    """Loads quiz questions from the JSON file."""
+    if not os.path.exists(filename) or not os.path.isfile(filename):
+        st.error(f"Error: Questions file '{filename}' not found.")
+        return None
     try:
-        with open(filename, 'r', encoding='utf-8') as f: questions_data = json.load(f)
-        if not isinstance(questions_data, list): st.error(f"Error: File '{filename}' not JSON list."); return None
+        with open(filename, 'r', encoding='utf-8') as f:
+            questions_data = json.load(f)
+        if not isinstance(questions_data, list):
+             st.error(f"Error: Questions file '{filename}' does not contain a valid JSON list.")
+             return None
         validated_questions = []
         for i, q in enumerate(questions_data):
-             if not isinstance(q, dict): st.warning(f"W: Item {i} not dict."); continue
+             if not isinstance(q, dict):
+                 st.warning(f"W: Item {i} not dict."); continue
              is_sim = q.get('is_simulation', False)
-             if 'question_text' not in q: st.warning(f"W: Q{i} missing text."); continue
+             if 'question_text' not in q:
+                 st.warning(f"W: Q{i} missing text."); continue
              if not is_sim:
-                  if ('options' not in q or q.get('options') is None or not isinstance(q.get('options'), dict)): st.warning(f"W: Q{i} missing options."); continue
-                  if ('correct_answer' not in q): st.warning(f"W: Q{i} missing answer key."); continue
+                  if ('options' not in q or q.get('options') is None or not isinstance(q.get('options'), dict)):
+                      st.warning(f"W: Q{i} missing options."); continue
+                  if ('correct_answer' not in q):
+                      st.warning(f"W: Q{i} missing answer key."); continue
                   ca = q.get('correct_answer')
-                  if isinstance(ca, str) and not ca.strip(): st.warning(f"W: Q{i} empty answer."); continue
+                  if isinstance(ca, str) and not ca.strip():
+                      st.warning(f"W: Q{i} empty answer."); continue
                   if isinstance(ca, str):
                       keys_in_ca = [k for k in ca.strip().split(' ') if k]
                       valid_options = q.get('options', {})
-                      if not all(k in valid_options for k in keys_in_ca): st.warning(f"W: Q{i} answer keys invalid."); continue
+                      if not all(k in valid_options for k in keys_in_ca):
+                           st.warning(f"W: Q{i} answer keys invalid."); continue
              validated_questions.append(q)
-        if not validated_questions: st.error(f"Error: No valid questions found."); return None
+        if not validated_questions:
+             st.error(f"Error: No valid questions found."); return None
         return validated_questions
-    except json.JSONDecodeError as e: st.error(f"Error parsing JSON: {e}"); return None
-    except Exception as e: st.error(f"Error loading questions: {e}"); return None
+    except json.JSONDecodeError as e:
+        st.error(f"Error parsing JSON: {e}"); return None
+    except Exception as e:
+        st.error(f"Error loading questions: {e}"); return None
 
 def initialize_state():
+    """Initializes session state variables."""
     if 'current_question_index' not in st.session_state: st.session_state.current_question_index = 0
     if 'score' not in st.session_state: st.session_state.score = 0
     if 'results' not in st.session_state: st.session_state.results = {}
@@ -42,18 +58,20 @@ def initialize_state():
     if 'navigated' not in st.session_state: st.session_state.navigated = False
 
 def reset_quiz():
+    """Resets the quiz state."""
     keys_to_reset = ['current_question_index', 'score', 'results', 'questions', 'total_questions', 'navigated']
     for key in keys_to_reset:
         if key in st.session_state: del st.session_state[key]
     load_questions.clear(); initialize_state(); st.rerun()
 
 def parse_correct_answer(correct_answer_value):
+    """Parses the correct_answer string into a sorted list of keys."""
     if isinstance(correct_answer_value, str):
         keys = sorted([key for key in correct_answer_value.strip().split(' ') if key])
         return keys
     return []
 
-# --- Inject Custom CSS (Hacker Theme - REMOVED pre>code styles) <<< CSS CHANGE >>> ---
+# --- Inject Custom CSS (Hacker Theme - Including mobile nav fix) <<< CSS CHANGE >>> ---
 st.markdown("""
     <style>
         /* Base theme styles */
@@ -75,37 +93,78 @@ st.markdown("""
         div[data-baseweb="select"] > div { background-color: #1a1a1a !important; border: 1px solid #555 !important; border-radius: 0 !important; color: #e0e0e0 !important; }
         span[data-baseweb="tag"] { background-color: #00ff41 !important; color: #0a0a0a !important; border-radius: 0 !important; }
 
-        /* REMOVED CSS for pre, pre > code */
+        /* Style the custom debrief box container */
+        .debrief-box {
+             background-color: #111 !important;
+             border: 1px dashed #00ff41 !important;
+             border-radius: 0 !important;
+             margin-top: 0.5em !important;
+             width: 100% !important;
+             box-sizing: border-box !important;
+             max-height: 300px !important;
+             overflow-y: auto !important;
+             overflow-x: hidden !important;
+             padding: 0.5em 1em !important;
+        }
+        /* Style the text *inside* the custom debrief box */
+        .debrief-box pre {
+             font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
+             color: #00ff41 !important;
+             white-space: pre-wrap !important;
+             word-wrap: break-word !important;
+             overflow-wrap: break-word !important;
+             margin: 0 !important;
+             padding: 0 !important;
+             background-color: transparent !important;
+             border: none !important;
+        }
+        /* Reduce top margin for the Question/Simulation subheader */
+        div[data-testid="stSubheader"] {
+            margin-top: 0.1em !important; padding-top: 0 !important; margin-bottom: 0.5em !important;
+        }
 
-        /* Style st.text elements if needed */
-        /* div[data-testid="stText"] { background-color: #1e1e1e; border: 1px solid #333; padding: 1em; border-radius: 0; } */
+        /* Force navigation columns to stay horizontal on mobile */
+        @media (max-width: 768px) { /* Adjust breakpoint as needed (e.g., 640px) */
+            .nav-button-row > div[data-testid="stHorizontalBlock"] {
+                flex-wrap: nowrap !important; /* Prevent wrapping into vertical stack */
+            }
+             /* Optional: Give button columns minimum width if needed */
+            .nav-button-row > div[data-testid="stHorizontalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"]:nth-child(1),
+            .nav-button-row > div[data-testid="stHorizontalBlock"] > div[data-testid="stVerticalBlockBorderWrapper"]:nth-child(3) {
+                 min-width: 100px; /* Ensure buttons don't get too squished */
+                 flex-shrink: 0; /* Prevent shrinking too much */
+            }
+        }
 
     </style>
 """, unsafe_allow_html=True)
 
-
 # --- Main App Logic ---
-# ... (Initialization, loading, variable setup unchanged) ...
 initialize_state()
+
+# --- Load Questions ---
 if st.session_state.questions is None:
     with st.spinner("Establishing connection... Loading question bank..."): st.session_state.questions = load_questions(JSON_FILE)
     if st.session_state.questions: st.session_state.total_questions = len(st.session_state.questions)
-    else: st.error("FATAL ERROR: Cannot load question bank. Aborting operation."); st.stop()
+    else: st.session_state.total_questions = 0
 questions = st.session_state.questions; total_questions = st.session_state.total_questions; current_index = st.session_state.current_question_index; score = st.session_state.score; results = st.session_state.results
-if total_questions == 0: st.error("ERROR: No valid questions found in source.");
-
-#if st.button("🔄 Attempt Re-init"): reset_quiz(); st.stop()
+if total_questions == 0: st.error("ERROR: No valid questions loaded from source. Check JSON file and sidebar."); st.stop()
 
 # --- Sidebar ---
 with st.sidebar:
-    # ... (Sidebar content unchanged) ...
     st.header("Pentester+ Quiz Interface v0.3"); st.divider(); st.header("CONTROLS")
     if st.button("🔄 RESET SESSION"): reset_quiz()
-    st.header("STATUS"); st.write(f"SCORE: {score} / {total_questions}")
-    progress_percent = ((current_index + 1) / total_questions) if total_questions > 0 else 0
-    progress_percent = max(0.0, min(1.0, progress_percent)); st.progress(progress_percent)
-    if current_index >= total_questions: st.write(">> Scan Complete <<")
-    else: st.write(f">> Analyzing Target: {current_index + 1} / {total_questions}")
+    if total_questions == 0 and questions is None:
+         st.warning("Load Failed!")
+         if st.button("🔄 Attempt Re-init"): reset_quiz()
+    st.divider(); st.header("STATUS")
+    if total_questions > 0:
+        st.write(f"SCORE: {score} / {total_questions}")
+        progress_percent = ((current_index + 1) / total_questions) if total_questions > 0 else 0
+        progress_percent = max(0.0, min(1.0, progress_percent)); st.progress(progress_percent)
+        if current_index >= total_questions: st.write(">> Scan Complete <<")
+        else: st.write(f">> Analyzing Target: {current_index + 1} / {total_questions}")
+    else: st.write("Status: Idle (Load Error)")
 
 # --- Main Content Area ---
 
@@ -116,12 +175,12 @@ if st.session_state.get("navigated", False):
 
 # 1. Results Page
 if current_index >= total_questions:
-    # ... (Results page structure unchanged) ...
     st.header("🏁 MISSION COMPLETE 🏁"); percentage = (score / total_questions * 100) if total_questions > 0 else 0
     st.metric(label="Final Score", value=f"{score} / {total_questions}", delta=f"{percentage:.1f}%"); st.subheader("/// ANALYSIS RESULTS ///")
     if not results: st.info(">>> No engagement data recorded. <<<")
     else:
         for i in range(total_questions):
+            # ... (Results display logic unchanged, except debrief rendering and nav wrapper) ...
             if i >= len(questions): continue
             question_data = questions[i]; q_num_ref = f" (#{question_data.get('question_number', 'N/A')})"
             q_text_snippet = question_data.get('question_text', '[No Text]')[:80] + "..."
@@ -130,7 +189,6 @@ if current_index >= total_questions:
                 result_data = results.get(i); original_correct_answer = question_data.get('correct_answer')
                 explanation = question_data.get('explanation', '/// No Debrief Available ///')
                 if question_data.get('is_simulation', False):
-                    # ... (Simulation review unchanged) ...
                     st.info("Type: Simulation Scenario")
                     if result_data and result_data.get('submitted'): st.write(f"Status: {result_data.get('submitted', '[ bypassed ]')}")
                     if 'simulation_details' in question_data: st.text_area("Simulation Parameters:", question_data['simulation_details'], height=100, disabled=True, key=f"review_sim_{i}")
@@ -141,15 +199,29 @@ if current_index >= total_questions:
                     st.write(f"Your Response: `{submitted_display}`"); st.write(f"Correct Response: `{original_correct_answer or 'N/A'}`")
                     if is_correct: st.success("✅ ACCESS GRANTED")
                     else: st.error("❌ ACCESS DENIED")
-                    st.markdown("**Debrief:**")
-                    st.text(explanation) # <<< CHANGE: Use st.text()
+                    st.subheader("/// DEBRIEF ///")
+                    escaped_explanation = html.escape(explanation)
+                    st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True)
                 else:
                     st.warning("⚠️ TARGET SKIPPED"); st.write(f"Correct Response: `{original_correct_answer or 'N/A'}`")
-                    st.markdown("**Debrief:**")
-                    st.text(explanation) # <<< CHANGE: Use st.text()
-    # Navigation on Results Page
-    if st.button("⬅️ REVIEW PREVIOUS", disabled=(current_index <= 0)):
-        st.session_state.current_question_index -= 1; st.session_state.navigated = True; st.rerun()
+                    st.subheader("/// DEBRIEF ///")
+                    escaped_explanation = html.escape(explanation)
+                    st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True)
+
+    # --- Navigation on Results Page (Spread Apart using columns in wrapper) --- <<< CHANGE >>>
+    st.markdown('<div class="nav-button-row">', unsafe_allow_html=True) # Start custom wrapper
+    nav_cols_results = st.columns([1, 5, 1]) # Col 0 (Prev), Col 1 (Spacer), Col 2 (Empty)
+    with nav_cols_results[0]: # Previous Button Column (Left)
+        if st.button("⬅️ REVIEW PREVIOUS", disabled=(current_index <= 0), key="nav_prev_results"): # Unique key
+            st.session_state.current_question_index -= 1
+            st.session_state.navigated = True
+            st.rerun()
+    with nav_cols_results[1]: # Spacer Column (Middle)
+        st.empty() # Leave empty to create space
+    with nav_cols_results[2]: # Empty Column (Right)
+        st.empty() # No next button here
+    st.markdown('</div>', unsafe_allow_html=True) # End custom wrapper
+
 
 # 2. Question Display
 else:
@@ -189,8 +261,7 @@ else:
             display_options_multi = {f"[{k}] {v}": k for k, v in options.items()}; option_keys_ordered_multi = list(display_options_multi.keys())
             default_selection_multi = []
             if has_been_answered and isinstance(results[current_index].get('submitted'), list):
-                submitted_keys = results[current_index]['submitted']
-                default_selection_multi = [disp for disp, k in display_options_multi.items() if k in submitted_keys]
+                submitted_keys = results[current_index]['submitted']; default_selection_multi = [disp for disp, k in display_options_multi.items() if k in submitted_keys]
             st.multiselect("Input:", option_keys_ordered_multi, default=default_selection_multi, key=f"q_{current_index}_multiselect_value", disabled=has_been_answered)
         elif question_type == 'radio':
             st.markdown("**Select ONE response:**")
@@ -233,32 +304,45 @@ else:
                  st.rerun()
 
     # --- FORM END ---
-
     # --- Display Feedback (Outside Form) ---
     if not is_simulation and has_been_answered:
+        # ... (Feedback display structure unchanged) ...
         result = results[current_index]; submitted = result.get('submitted'); explanation = current_question.get('explanation', '/// No Debrief Available ///')
         is_correct = result.get('correct'); original_correct_answer = current_question.get('correct_answer')
         submitted_display = ', '.join(sorted(submitted)) if isinstance(submitted, list) else submitted
         if not submitted_display: submitted_display = "[ No Response ]"
         if is_correct: st.success(f"✅ ACCESS GRANTED | Your input: `{submitted_display}`")
         else: st.error(f"❌ ACCESS DENIED | Your input: `{submitted_display}`, Expected: `{original_correct_answer}`")
-        st.markdown("**Debrief:**")
-        st.text(explanation) # <<< CHANGE: Use st.text()
+        st.subheader("/// DEBRIEF ///") # Thematic label
+        escaped_explanation = html.escape(explanation) # Escape for security
+        st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True) # Use custom div
 
-    # --- Navigation Buttons (NOT Wrapped) ---
-    st.write("---")
-    nav_cols = st.columns(2)
-    with nav_cols[0]: # Previous
+
+    # --- Navigation Buttons (Spread Apart using columns in wrapper) --- <<< CHANGE >>>
+    st.markdown('<div class="nav-button-row">', unsafe_allow_html=True) # Start custom wrapper
+    nav_cols_question = st.columns([1, 2, 1]) # Col 0 (Prev), Col 1 (Spacer), Col 2 (Next)
+
+    with nav_cols_question[0]: # Previous Button Column (Left)
         if st.button("⬅️ PREVIOUS", disabled=(current_index <= 0), key="nav_prev"):
-            st.session_state.current_question_index -= 1; st.session_state.navigated = True; st.rerun()
-    with nav_cols[1]: # Next
+            st.session_state.current_question_index -= 1
+            st.session_state.navigated = True
+            st.rerun()
+
+    with nav_cols_question[1]: # Spacer Column (Middle)
+        st.empty() # Leave empty to create space
+
+    with nav_cols_question[2]: # Next Button Column (Right)
         next_label = "NEXT ➡️"; disable_next = (question_type != 'simulation') and not has_been_answered
         if question_type == 'simulation': next_label = "NEXT SIM/TARGET ➡️"
         if current_index == total_questions - 1: next_label = "VIEW REPORT 🏁"
         if st.button(next_label, disabled=disable_next, key="nav_next"):
             if question_type == 'simulation' and current_index not in results:
                  st.session_state.results[current_index] = {'submitted': '[Simulation Bypassed]', 'correct': None, 'is_simulation': True, 'question_type': 'simulation'}
-            st.session_state.current_question_index += 1; st.session_state.navigated = True; st.rerun()
+            st.session_state.current_question_index += 1
+            st.session_state.navigated = True
+            st.rerun()
+    st.markdown('</div>', unsafe_allow_html=True) # End custom wrapper
+
 
 # --- Footer ---
 st.markdown("---")
