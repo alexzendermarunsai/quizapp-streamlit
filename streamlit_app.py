@@ -224,6 +224,10 @@ if current_index >= total_questions:
         if st.button("⬅️ REVIEW PREVIOUS", disabled=(current_index <= 0), key="nav_prev_results"): # Unique key
             st.session_state.current_question_index -= 1
             st.session_state.navigated = True
+            # Inject JavaScript to scroll to the top
+            st.components.v1.html(
+                "<script>window.parent.document.body.scrollTop = 0;</script>", height=0
+            )
             st.rerun()
     with nav_cols_results[1]: # Spacer Column (Middle)
         st.empty() # Leave empty to create space
@@ -335,6 +339,10 @@ else:
         if st.button("⬅️ PREVIOUS", disabled=(current_index <= 0), key="nav_prev"):
             st.session_state.current_question_index -= 1
             st.session_state.navigated = True
+            # Inject JavaScript to scroll to the top
+            st.components.v1.html(
+                "<script>window.parent.document.body.scrollTop = 0;</script>", height=0
+            )
             st.rerun()
 
     with nav_cols_question[1]: # Spacer Column (Middle)
@@ -349,6 +357,10 @@ else:
                  st.session_state.results[current_index] = {'submitted': '[Simulation Bypassed]', 'correct': None, 'is_simulation': True, 'question_type': 'simulation'}
             st.session_state.current_question_index += 1
             st.session_state.navigated = True
+            # Inject JavaScript to scroll to the top
+            st.components.v1.html(
+                "<script>window.parent.document.body.scrollTop = 0;</script>", height=0
+            )
             st.rerun()
     st.markdown('</div>', unsafe_allow_html=True) # End custom wrapper
 
