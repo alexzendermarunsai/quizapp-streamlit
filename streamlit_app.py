@@ -332,37 +332,41 @@ else:
 
 
     # --- Navigation Buttons (Spread Apart using columns in wrapper) --- <<< CHANGE >>>
-    st.markdown('<div class="nav-button-row">', unsafe_allow_html=True) # Start custom wrapper
-    nav_cols_question = st.columns([1, 2, 1]) # Col 0 (Prev), Col 1 (Spacer), Col 2 (Next)
+    st.markdown('<div class="nav-button-row">', unsafe_allow_html=True)  # Start custom wrapper
+    nav_cols_question = st.columns([1, 2, 1])  # Col 0 (Prev), Col 1 (Spacer), Col 2 (Next)
 
-    with nav_cols_question[0]: # Previous Button Column (Left)
+    with nav_cols_question[0]:  # Previous Button Column (Left)
         if st.button("⬅️ PREVIOUS", disabled=(current_index <= 0), key="nav_prev"):
             st.session_state.current_question_index -= 1
             st.session_state.navigated = True
-            # Inject JavaScript to scroll to the top
-            st.components.v1.html(
-                "<script>window.parent.document.body.scrollTop = 0;</script>", height=0
-            )
+            # Use query params to refresh and scroll to top
+            st.experimental_set_query_params()
             st.rerun()
 
-    with nav_cols_question[1]: # Spacer Column (Middle)
-        st.empty() # Leave empty to create space
+    with nav_cols_question[1]:  # Spacer Column (Middle)
+        st.empty()  # Leave empty to create space
 
-    with nav_cols_question[2]: # Next Button Column (Right)
-        next_label = "NEXT ➡️"; disable_next = (question_type != 'simulation') and not has_been_answered
-        if question_type == 'simulation': next_label = "NEXT SIM/TARGET ➡️"
-        if current_index == total_questions - 1: next_label = "VIEW REPORT 🏁"
+    with nav_cols_question[2]:  # Next Button Column (Right)
+        next_label = "NEXT ➡️"
+        disable_next = (question_type != 'simulation') and not has_been_answered
+        if question_type == 'simulation':
+            next_label = "NEXT SIM/TARGET ➡️"
+        if current_index == total_questions - 1:
+            next_label = "VIEW REPORT 🏁"
         if st.button(next_label, disabled=disable_next, key="nav_next"):
             if question_type == 'simulation' and current_index not in results:
-                 st.session_state.results[current_index] = {'submitted': '[Simulation Bypassed]', 'correct': None, 'is_simulation': True, 'question_type': 'simulation'}
+                st.session_state.results[current_index] = {
+                    'submitted': '[Simulation Bypassed]',
+                    'correct': None,
+                    'is_simulation': True,
+                    'question_type': 'simulation'
+                }
             st.session_state.current_question_index += 1
             st.session_state.navigated = True
-            # Inject JavaScript to scroll to the top
-            st.components.v1.html(
-                "<script>window.parent.document.body.scrollTop = 0;</script>", height=0
-            )
+            # Use query params to refresh and scroll to top
+            st.experimental_set_query_params()
             st.rerun()
-    st.markdown('</div>', unsafe_allow_html=True) # End custom wrapper
+    st.markdown('</div>', unsafe_allow_html=True)  # End custom wrapper
 
 
 # --- Footer ---
