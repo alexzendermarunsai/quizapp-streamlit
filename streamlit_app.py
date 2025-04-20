@@ -166,6 +166,15 @@ with st.sidebar:
         else: st.write(f">> Analyzing Target: {current_index + 1} / {total_questions}")
     else: st.write("Status: Idle (Load Error)")
 
+# Add a feature to navigate to a specific question by its number
+with st.sidebar:
+    st.header("Navigation")
+    question_number = st.number_input("Enter question number to jump to:", min_value=1, max_value=total_questions, step=1)
+    if st.button("Go to Question"):
+        st.session_state.current_question_index = question_number - 1
+        st.session_state.navigated = True
+        st.rerun()
+
 # --- Main Content Area ---
 
 # Scroll logic
