@@ -4,7 +4,7 @@ import os
 import html # Required for escaping explanation text
 
 # --- Configuration ---
-JSON_FILE = 'questions_bank.json'
+JSON_FILE = 'questions_bank_casp.json'
 
 # --- Functions ---
 @st.cache_data
@@ -244,7 +244,8 @@ else:
             correct_answer_keys = parse_correct_answer(correct_answer_str); num_correct_keys = len(correct_answer_keys)
             if num_correct_keys == 1: question_type = 'radio'
             elif num_correct_keys == 2: question_type = 'checkbox'
-            elif num_correct_keys > 2: question_type = 'multiselect'
+            elif num_correct_keys == 3: question_type = 'triple'
+            elif num_correct_keys > 3: question_type = 'multiselect'
             else: st.warning(f"T{current_index+1}: Config error. Sim.", icon="⚠️"); question_type = 'simulation'; is_simulation = True
         else: st.warning(f"T{current_index+1}: Missing/invalid config. Sim.", icon="⚠️"); question_type = 'simulation'; is_simulation = True
     has_been_answered = current_index in results
@@ -282,6 +283,11 @@ else:
                     try: default_index_radio = option_keys_ordered_radio.index(matching_display[0])
                     except ValueError: pass
             st.radio("Input:", option_keys_ordered_radio, index=default_index_radio, key=f"q_{current_index}_radio_value", disabled=has_been_answered, format_func=lambda x: x)
+        elif question_type == 'triple':
+            st.markdown("**Select EXACTLY THREE responses:**")
+            for opt_key, opt_text in options.items():
+                default_checked = has_been_answered and isinstance(results[current_index].get('submitted'), list) and opt_key in results[current_index]['submitted']
+                st.checkbox(f"[{opt_key}] {opt_text}", key=f"q_{current_index}_option_{opt_key}", value=default_checked, disabled=has_been_answered)
 
         # --- Submit Button (Inside Form) ---
         submit_button_label = "EXECUTE"; disable_submit = has_been_answered or (question_type == 'simulation')
@@ -305,6 +311,13 @@ else:
                 display_options_radio_map = {f"[{k}] {v}": k for k, v in options.items()}; actual_submitted_answer = display_options_radio_map.get(selected_display_value)
                 if actual_submitted_answer is not None: is_valid_submission = True
                 else: st.warning("Input Error: Requires 1 selection.", icon="⚠️")
+            elif question_type == 'triple':
+                collected_keys = [opt_key for opt_key in options if st.session_state.get(f"q_{current_index}_option_{opt_key}", False)]
+                actual_submitted_answer = sorted(collected_keys)
+                if len(actual_submitted_answer) == 3:
+                    is_valid_submission = True
+                else:
+                    st.warning("Input Error: Requires exactly 3 selections.", icon="⚠️")
             if is_valid_submission:
                  submitted_answer_norm = actual_submitted_answer if isinstance(actual_submitted_answer, list) else [actual_submitted_answer]
                  is_correct = (submitted_answer_norm == correct_answer_keys)
