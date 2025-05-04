@@ -79,6 +79,9 @@ st.markdown("""
         .stButton > button { border: 1px solid #007fff; border-radius: 0; background-color: #1a1a1a; color: #007fff; padding: 8px 15px; transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0, 127, 255, 0.3); }
         .stButton > button:hover { background-color: #007fff !important; color: #0a0a0a !important; border-color: #007fff !important; box-shadow: 0 0 15px rgba(0, 127, 255, 0.7) !important; }
         .stButton > button:disabled { border-color: #555; background-color: #222; color: #555; opacity: 0.7; box-shadow: none; }
+        .stFormSubmitButton > button { border: 1px solid #007fff; border-radius: 0; background-color: #1a1a1a; color: #007fff; padding: 8px 15px; transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0, 127, 255, 0.3); }
+        .stFormSubmitButton > button:hover { background-color: #007fff !important; color: #0a0a0a !important; border-color: #007fff !important; box-shadow: 0 0 15px rgba(0, 127, 255, 0.7) !important; }
+        .number_input
         .stAlert { border-radius: 0 !important; border-left: 5px solid !important; background-color: #1a1a1a !important; }
         .stAlert[data-baseweb="notification"][data-kind="success"] { border-left-color: #007fff !important; color: #007fff !important; }
         .stAlert[data-baseweb="notification"][data-kind="error"] { border-left-color: #ff4757 !important; color: #ff4757 !important; }
