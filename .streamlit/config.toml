@@ -1,8 +1,8 @@
 # .streamlit/config.toml
 
 [theme]
-# Hacker Green Theme
-primaryColor="#00ff41"         # Accent color (buttons, highlights) - Classic green
+# SecurityX Azure Blue Theme
+primaryColor="#007fff"         # Accent color (buttons, highlights) - Azure Blue
 backgroundColor="#0a0a0a"     # Very dark background
 secondaryBackgroundColor="#1a1a1a" # Slightly lighter dark for elements like sidebar, expanders
 textColor="#e0e0e0"             # Main text color (light gray/off-white)
