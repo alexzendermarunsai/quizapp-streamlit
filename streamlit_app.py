@@ -76,27 +76,27 @@ st.markdown("""
     <style>
         /* Base theme styles */
         html, body, [class*="st-"], .main * { font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important; }
-        .stButton > button { border: 1px solid #00ff41; border-radius: 0; background-color: #1a1a1a; color: #00ff41; padding: 8px 15px; transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0, 255, 65, 0.3); }
-        .stButton > button:hover { background-color: #00ff41; color: #0a0a0a; border-color: #00ff41; box-shadow: 0 0 15px rgba(0, 255, 65, 0.7); }
+        .stButton > button { border: 1px solid #007fff; border-radius: 0; background-color: #1a1a1a; color: #007fff; padding: 8px 15px; transition: all 0.3s ease; box-shadow: 0 0 5px rgba(0, 127, 255, 0.3); }
+        .stButton > button:hover { background-color: #007fff; color: #0a0a0a; border-color: #007fff; box-shadow: 0 0 15px rgba(0, 127, 255, 0.7); }
         .stButton > button:disabled { border-color: #555; background-color: #222; color: #555; opacity: 0.7; box-shadow: none; }
         .stAlert { border-radius: 0 !important; border-left: 5px solid !important; background-color: #1a1a1a !important; }
-        .stAlert[data-baseweb="notification"][data-kind="success"] { border-left-color: #00ff41 !important; color: #00ff41 !important; }
+        .stAlert[data-baseweb="notification"][data-kind="success"] { border-left-color: #007fff !important; color: #007fff !important; }
         .stAlert[data-baseweb="notification"][data-kind="error"] { border-left-color: #ff4757 !important; color: #ff4757 !important; }
         .stAlert[data-baseweb="notification"][data-kind="warning"] { border-left-color: #ffa502 !important; color: #ffa502 !important; }
         .stAlert[data-baseweb="notification"][data-kind="info"] { border-left-color: #00ffff !important; color: #00ffff !important; }
         .stAlert svg { fill: currentColor !important; }
         .stExpander { border: 1px solid #555 !important; border-radius: 0 !important; background-color: #1a1a1a !important; }
-        .stExpander header { font-size: 1.1em !important; color: #00ff41 !important; background-color: #1a1a1a !important; }
-        .stProgress > div > div > div > div { background-color: #00ff41 !important; }
+        .stExpander header { font-size: 1.1em !important; color: #007fff !important; background-color: #1a1a1a !important; }
+        .stProgress > div > div > div > div { background-color: #007fff !important; }
         label[data-baseweb="radio"] span, label[data-baseweb="checkbox"] span { color: #e0e0e0 !important; }
-        label[data-baseweb="radio"] span:hover, label[data-baseweb="checkbox"] span:hover { color: #00ff41 !important; }
+        label[data-baseweb="radio"] span:hover, label[data-baseweb="checkbox"] span:hover { color: #007fff !important; }
         div[data-baseweb="select"] > div { background-color: #1a1a1a !important; border: 1px solid #555 !important; border-radius: 0 !important; color: #e0e0e0 !important; }
-        span[data-baseweb="tag"] { background-color: #00ff41 !important; color: #0a0a0a !important; border-radius: 0 !important; }
+        span[data-baseweb="tag"] { background-color: #007fff !important; color: #0a0a0a !important; border-radius: 0 !important; }
 
         /* Style the custom debrief box container */
         .debrief-box {
              background-color: #111 !important;
-             border: 1px dashed #00ff41 !important;
+             border: 1px dashed #007fff !important;
              border-radius: 0 !important;
              margin-top: 0.5em !important;
              width: 100% !important;
@@ -109,7 +109,7 @@ st.markdown("""
         /* Style the text *inside* the custom debrief box */
         .debrief-box pre {
              font-family: 'Consolas', 'Monaco', 'Courier New', monospace !important;
-             color: #00ff41 !important;
+             color: #007fff !important;
              white-space: pre-wrap !important;
              word-wrap: break-word !important;
              overflow-wrap: break-word !important;
@@ -152,7 +152,7 @@ if total_questions == 0: st.error("ERROR: No valid questions loaded from source.
 
 # --- Sidebar ---
 with st.sidebar:
-    st.header("Pentester+ Quiz Interface v0.3"); st.divider(); st.header("CONTROLS")
+    st.header("SecurityX Quiz Interface v0.5"); st.divider(); st.header("CONTROLS")
     if st.button("🔄 RESET SESSION"): reset_quiz()
     if total_questions == 0 and questions is None:
          st.warning("Load Failed!")
