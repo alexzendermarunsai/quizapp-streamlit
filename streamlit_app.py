@@ -166,7 +166,7 @@ with st.sidebar:
         progress_percent = ((current_index + 1) / total_questions) if total_questions > 0 else 0
         progress_percent = max(0.0, min(1.0, progress_percent)); st.progress(progress_percent)
         if current_index >= total_questions: st.write(">> Scan Complete <<")
-        else: st.write(f">> Analyzing Target: {current_index + 1} / {total_questions}")
+        else: st.write(f" PROGRESS: {current_index + 1} / {total_questions}")
     else: st.write("Status: Idle (Load Error)")
 
 # Add a feature to navigate to a specific question by its number
@@ -209,14 +209,14 @@ if current_index >= total_questions:
                     submitted_display = ', '.join(sorted(submitted)) if isinstance(submitted, list) else submitted
                     if not submitted_display: submitted_display = "[ No Response ]"
                     st.write(f"Your Response: `{submitted_display}`"); st.write(f"Correct Response: `{original_correct_answer or 'N/A'}`")
-                    if is_correct: st.success("✅ ACCESS GRANTED")
-                    else: st.error("❌ ACCESS DENIED")
-                    st.subheader("/// DEBRIEF ///")
+                    if is_correct: st.success("✅ CORRECT ANSWER")
+                    else: st.error("❌ WRONG ANSWER")
+                    st.subheader("/// EXPLAINATION ///")
                     escaped_explanation = html.escape(explanation)
                     st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True)
                 else:
                     st.warning("⚠️ TARGET SKIPPED"); st.write(f"Correct Response: `{original_correct_answer or 'N/A'}`")
-                    st.subheader("/// DEBRIEF ///")
+                    st.subheader("/// EXPLAINATION ///")
                     escaped_explanation = html.escape(explanation)
                     st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True)
 
@@ -252,9 +252,9 @@ else:
             else: st.warning(f"T{current_index+1}: Config error. Sim.", icon="⚠️"); question_type = 'simulation'; is_simulation = True
         else: st.warning(f"T{current_index+1}: Missing/invalid config. Sim.", icon="⚠️"); question_type = 'simulation'; is_simulation = True
     has_been_answered = current_index in results
-    st.subheader(f"{'// SIMULATION //' if is_simulation else '// QUESTION //'} {current_index + 1} / {total_questions}")
+    st.subheader(f"{' SIMULATION ' if is_simulation else ' QUESTION '} {current_index + 1} / {total_questions}")
     q_num_ref = current_question.get('question_number')
-    if q_num_ref: st.caption(f"Ref ID: {q_num_ref}")
+    if q_num_ref: st.caption(f"Ref No: {q_num_ref}")
 
     # --- Form for answering ---
     with st.form(key=f"quiz_form_{current_index}", clear_on_submit=False):
@@ -293,7 +293,7 @@ else:
                 st.checkbox(f"[{opt_key}] {opt_text}", key=f"q_{current_index}_option_{opt_key}", value=default_checked, disabled=has_been_answered)
 
         # --- Submit Button (Inside Form) ---
-        submit_button_label = "EXECUTE"; disable_submit = has_been_answered or (question_type == 'simulation')
+        submit_button_label = "CHECK"; disable_submit = has_been_answered or (question_type == 'simulation')
         submitted_via_button = st.form_submit_button(submit_button_label, disabled=disable_submit)
 
         # --- Process Submission (Inside Form) ---
@@ -336,9 +336,9 @@ else:
         is_correct = result.get('correct'); original_correct_answer = current_question.get('correct_answer')
         submitted_display = ', '.join(sorted(submitted)) if isinstance(submitted, list) else submitted
         if not submitted_display: submitted_display = "[ No Response ]"
-        if is_correct: st.success(f"✅ ACCESS GRANTED | Your input: `{submitted_display}`")
-        else: st.error(f"❌ ACCESS DENIED | Your input: `{submitted_display}`, Expected: `{original_correct_answer}`")
-        st.subheader("/// DEBRIEF ///") # Thematic label
+        if is_correct: st.success(f"✅ CORRECT ANSWER | Your input: `{submitted_display}`")
+        else: st.error(f"❌ WRONG ANSWER | Your input: `{submitted_display}`, Expected: `{original_correct_answer}`")
+        st.subheader("/// EXPLANATION ///") # Thematic label
         escaped_explanation = html.escape(explanation) # Escape for security
         st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True) # Use custom div
 
