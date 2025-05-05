@@ -258,7 +258,11 @@ else:
 
     # --- Form for answering ---
     with st.form(key=f"quiz_form_{current_index}", clear_on_submit=False):
-        st.markdown(f"**>>> {current_question.get('question_text', 'Text segment corrupted.')}**")
+        # Replace \n with <br> in the question text
+        formatted_question_text = current_question.get('question_text', 'Text segment corrupted.').replace('\n', '<br>')
+
+        # Render the question text with line breaks
+        st.markdown(f"**>>> {formatted_question_text}**", unsafe_allow_html=True)
         # --- Render Widgets ---
         # ... (Widget rendering logic unchanged) ...
         if question_type == 'simulation':
@@ -339,7 +343,7 @@ else:
         if is_correct: st.success(f"✅ CORRECT ANSWER | Your input: `{submitted_display}`")
         else: st.error(f"❌ WRONG ANSWER | Your input: `{submitted_display}`, Expected: `{original_correct_answer}`")
         st.subheader("/// EXPLANATION ///") # Thematic label
-        escaped_explanation = html.escape(explanation) # Escape for security
+        escaped_explanation = html.escape(explanation).replace('\n', '<br>') # Escape for security
         st.markdown(f'<div class="debrief-box"><pre>{escaped_explanation}</pre></div>', unsafe_allow_html=True) # Use custom div
 
 
