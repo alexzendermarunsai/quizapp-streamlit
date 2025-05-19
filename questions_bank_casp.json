@@ -17,7 +17,7 @@
   },
   {
     "question_number": 2,
-    "question_text": "A user reports application access issues to the help desk. The help desk reviews the logs for the user:\n[Image of logs showing Time, Internal IP, Public IP, IP Geolocation, Application, and Action. Entries show access to VPN, Email, HR System from Toronto and Los Angeles at different times, with one HR System access attempt from Toronto being denied.]\nWhich of the following is most likely the reason for the issue?",
+    "question_text": "A user reports application access issues to the help desk. The help desk reviews the logs for the user:\n\n| Time   | Internal IP | Public IP    | IP Geolocation | Application | Action |\n| 8:47 PM| 192.168.1.5 | 104.18.16.29 | Toronto        | VPN         | Allow  |\n| 8:48 PM| 10.10.2.21  | 95.67.137.12 | Los Angeles    | Email       | Allow  |\n| 8:48 PM| 10.10.2.21  | 95.67.137.12 | Los Angeles    | HR System   | Allow  |\n| 8:49 PM| 10.10.2.21  | 95.67.137.12 | Los Angeles    | Email       | Allow  |\n| 8:52 PM| 192.168.1.5 | 104.18.16.29 | Toronto        | HR System   | Deny   |\n\nWhich of the following is most likely the reason for the issue?",
     "options": {
       "A": "The user inadvertently tripped the geoblock rule in NGFW.",
       "B": "A threat actor has compromised the user's account and attempted to log in.",
@@ -87,7 +87,7 @@
   },
   {
     "question_number": 7,
-    "question_text": "A company's help desk is experiencing a large number of calls from the finance department stating access issues to www.bank.com. The security operations center reviewed the following security logs:\n[Image of logs showing user, source, location, website, DNS resolved IP (public), Code.]\nWhich of the following is most likely the cause of the issue?",
+    "question_text": "A company's help desk is experiencing a large number of calls from the finance department stating access issues to www.bank.com. The security operations center reviewed the following security logs:\n\n| User   | User IP & Subnet   | Location | Website       | DNS Resolved IP (public) | HTTP Status Code |\n| User12 | 10.200.2.52/24     | Finance  | www.bank.com  | 65.146.76.34             | 495              |\n| User31 | 10.200.2.213/24    | Finance  | www.bank.com  | 65.146.76.34             | 495              |\n| User46 | 10.200.5.76/24     | IT       | www.bank.com  | 98.17.62.78              | 200              |\n| User23 | 10.200.2.156/24    | Finance  | www.bank.com  | 65.146.76.34             | 495              |\n| User51 | 10.200.4.138/24    | Legal    | www.bank.com  | 98.17.62.78              | 200              |\n\nWhich of the following is most likely the cause of the issue?",
     "options": {
       "A": "Recursive DNS resolution is failing",
       "B": "The DNS record has been poisoned.",
@@ -339,7 +339,7 @@
   },
   {
     "question_number": 25,
-    "question_text": "A security engineer is reviewing the following logs:\n[Image of logs showing Account, Host, Log-in date, Log-in time, Location, which is likely used for analysis.]\nWhich of the following is the security engineer most likely doing?",
+    "question_text": "A security engineer is reviewing the following logs:\n\n| Account   | Host   | Log-in date | Local log-in time | Office location |\n| Sales_1   | PC-10  | 4/16        | 9:05 a.m.         | USA             |\n| Sales_1   | PC-18  | 4/17        | 9:10 a.m.         | USA             |\n| Sales_1   | PC-10  | 4/18        | 9:08 a.m.         | USA             |\n| Sales_1   | PC-10  | 4/19        | 9:01 a.m.         | USA             |\n| Sales_1   | PC-64  | 4/21        | 8:58 a.m.         | UK              |\n\nWhich of the following is the security engineer most likely doing?",
     "options": {
       "A": "Assessing log in activities using geolocation to tune impossible Travel rate alerts",
       "B": "Reporting on remote log-in activities to track team metrics",
@@ -561,7 +561,7 @@
   },
   {
     "question_number": 41,
-    "question_text": "A company’s internal network is experiencing a security breach, and the threat actor is still active. Due to business requirements, users in this environment are allowed to utilize multiple machines at the same time. Given the following log snippet:\n[Image of logs showing Time, User, Process, Status, Machine.]\nWhich of the following accounts should a security analyst disable to best contain the incident without impacting valid users?",
+    "question_text": "A company’s internal network is experiencing a security breach, and the threat actor is still active. Due to business requirements, users in this environment are allowed to utilize multiple machines at the same time. Given the following log snippet:\n\n| Time  | User  | Process       | Status  | Machine   |\n| 10:11 | user-a| .exe          | blocked | machine02 |\n| 10:15 | user-b| setup.exe     | blocked | machine02 |\n| 10:15 | user-A| appwiz.exe    | blocked | machine01 |\n| 10:16 | user-c| appwiz.CPL    | blocked | machine03 |\n| 11:17 | user-c| cmd.exe       | blocked | machine03 |\n| 11:18 | user-h| msconfig.exe  | blocked | machine04 |\n| 11:19 | user-d| firefox.exe   | blocked | machine04 |\n| 11:19 | user-d| cmd.com       | blocked | machine01 |\n\nWhich of the following accounts should a security analyst disable to best contain the incident without impacting valid users?",
     "options": {
       "A": "user-a",
       "B": "user-b",
@@ -589,7 +589,7 @@
   },
   {
     "question_number": 43,
-    "question_text": "A security analyst is reviewing the following authentication logs:\n[Image of authentication logs showing date, time, computer, account, Ping-10 (Y/N).]\nWhich of the following should the analyst do first?",
+    "question_text": "A security analyst is reviewing the following authentication logs:\n\n| Date  | Time      | Computer | Account | Log-in success? |\n| 12/15 | 8:01:23AM | VM01     | User1   | No              |\n| 12/15 | 8:01:23AM | VM01     | User1   | No              |\n| 12/15 | 8:01:23AM | VM08     | User8   | No              |\n| 12/15 | 8:01:23AM | VM01     | User1   | No              |\n| 12/15 | 8:01:23AM | VM01     | User1   | No              |\n| 12/15 | 8:01:23AM | VM12     | User12  | Yes             |\n| 12/15 | 8:01:23AM | VM01     | User1   | Yes             |\n| 12/15 | 8:01:23AM | VM01     | User2   | No              |\n| 12/15 | 8:01:24AM | VM01     | User2   | No              |\n| 12/15 | 8:01:24AM | VM01     | User2   | No              |\n| 12/15 | 8:01:25AM | VM01     | User2   | No              |\n| 12/15 | 8:01:25AM | VM08     | User8   | Yes             |\n\nWhich of the following should the analyst do first?",
     "options": {
       "A": "Disable User2's account",
       "B": "Disable User12's account",
@@ -702,7 +702,7 @@
   },
   {
     "question_number": 51,
-    "question_text": "During a security assessment using an EDR solution, a security engineer generates the following report about the assets in the system:\n[Image of report showing Device, Type, Status.]\nAfter five days, the EDR console reports an infection on the host 0WIN23 by a remote access Trojan. Which of the following is the most probable cause of the infection?",
+    "question_text": "During a security assessment using an EDR solution, a security engineer generates the following report about the assets in the system:\n\n| Device | Type       | Status            |\n| LN002  | Linux SE   | Enabled (unmanaged)|\n| 0WIN23 | Windows 7  | Enabled           |\n| 0WIN29 | Windows 10 | Enabled (bypass)  |\n\nAfter five days, the EDR console reports an infection on the host 0WIN23 by a remote access Trojan. Which of the following is the most probable cause of the infection?",
     "options": {
       "A": "OWIN23 uses a legacy version of Windows that is not supported by the EDR",
       "B": "LN002 was not supported by the EDR solution and propagates the RAT",
@@ -716,7 +716,7 @@
   },
   {
     "question_number": 52,
-    "question_text": "After an incident response exercise, a security administrator reviews the following table:\n[Image of table showing Service, Risk rating, Criticality rating, Alert severity.]\nWhich of the following should the administrator do to best support rapid incident response in the future?",
+    "question_text": "After an incident response exercise, a security administrator reviews the following table:\n\n| Service                 | Risk rating | Criticality rating | Alert severity |\n| Public website          | Medium      | Low                | Low            |\n| Email                   | High        | High               | High           |\n| Human resources systems | High        | Medium             | Medium         |\n| Phone system            | High        | Critical           | Critical       |\n| Intranet                | Low         | Low                | Low            |\n\nWhich of the following should the administrator do to best support rapid incident response in the future?",
     "options": {
       "A": "Automate alerting to IT support for phone system outages.",
       "B": "Enable dashboards for service status monitoring",
@@ -846,7 +846,7 @@
   },
   {
     "question_number": 61,
-    "question_text": "A security analyst reviews the following report:\n[Image of table showing Product, Location, Chassis manufacturer, OS, Application developer, Vendor.]\nWhich of the following assessments is the analyst performing?",
+    "question_text": "A security analyst reviews the following report:\n\n| Product   | Location      | Chassis manufacturer | OS                         | Application developer | Vendor                      |\n| Product A | United States | Local company A      | Debian 11                  | Unknown               | Charlie Security Consulting |\n| Product B | United States | Global company B     | Red Hat Enterprise Linux | Developer B           | BigBox Vulnerabilities      |\n\nWhich of the following assessments is the analyst performing?",
     "options": {
       "A": "System",
       "B": "Supply chain",
@@ -890,7 +890,7 @@
   },
   {
     "question_number": 64,
-    "question_text": "An analyst reviews a SIEM and generates the following report:\n[Image of SIEM report showing Host, Rule, Offense Trigger.]\nOnly HOST002 is authorized for internet traffic. Which of the following statements is accurate?",
+    "question_text": "An analyst reviews a SIEM and generates the following report:\n\n| Host    | Rule              | Offense Trigger                                    |\n| VM002   | Network connection| TCP connection generated to web.corp.local         |\n| HOST002 | Network connection| Web navigation to comptia.org                      |\n| HOST002 | File download     | File download from web browser from web.corp.local |\n| VM002   | Network connection| Web navigation to web.corp.local                   |\n| HOST002 | Network connection| Web navigation to comptia.org/files                |\n| HOST002 | Log-in activity   | Log-in successful after two attempts               |\n\nOnly HOST002 is authorized for internet traffic. Which of the following statements is accurate?",
     "options": {
       "A": "The VM002 host is misconfigured and needs to be revised by the network team.",
       "B": "The HOST002 host is under attack, and a security incident should be declared.",
@@ -946,7 +946,7 @@
   },
   {
     "question_number": 68,
-    "question_text": "A security analyst needs to ensure email domains that send phishing attempts without previous communications are not delivered to mailboxes. The following email headers are being reviewed:\n[Image of email headers showing Date, From, To, Reply-to domain, Subject.]\nWhich of the following is the best action for the security analyst to take?",
+    "question_text": "A security analyst needs to ensure email domains that send phishing attempts without previous communications are not delivered to mailboxes. The following email headers are being reviewed:\n\n| Date   | Sending domain | Reply-to domain | Subject                       |\n| April 16 | sales.com      | sales-mail.com  | Updated Security Questions    |\n| April 18 | vendor.com     | vendor.com      | New Sales Catalog             |\n| April 18 | partner.com    | partner.com     | B2B Sales Increase            |\n| April 19 | hr-saas.com    | hr-saas.com     | Employee Payroll Update Request |\n| April 19 | vendor.com     | vendor.com      | Password Requirements Not Met |\n\nWhich of the following is the best action for the security analyst to take?",
     "options": {
       "A": "Block messages from hr-saas.com because it is not a recognized domain.",
       "B": "Reroute all messages with unusual security warning notices to the IT administrator",
@@ -990,7 +990,7 @@
   },
   {
     "question_number": 71,
-    "question_text": "A security professional is investigating a trend in vulnerability findings for newly deployed cloud systems. Given the following output:\n[Image of table showing Date, IP Address, System name, Finding, Criticality rating.]\nWhich of the following actions would address the root cause of this issue?",
+    "question_text": "A security professional is investigating a trend in vulnerability findings for newly deployed cloud systems. Given the following output:\n\n| Date       | IP address   | System name | Finding                         | Criticality rating |\n| 10/13/2023 | 10.123.34.98 | System1     | OpenSSL version 1.01            | Medium             |\n| 10/13/2023 | 10.3.114.72  | System6     | OpenSSL version 1.01            | Medium             |\n| 10/13/2023 | 10.12.134.45 | System12    | Java 11 runtime environment found | Medium             |\n| 10/13/2023 | 10.60.65.11  | System36    | OpenSSL version 1.01            | Medium             |\n| 10/13/2023 | 10.23.74.9   | System37    | Java 11 runtime environment found | Medium             |\n| 10/13/2023 | 10.13.124.3  | System45    | OpenSSL version 1.01            | Medium             |\n\nWhich of the following actions would address the root cause of this issue?",
     "options": {
       "A": "Automating the patching system to update base Images",
       "B": "Recompiling the affected programs with the most current patches",
@@ -1047,7 +1047,7 @@
   },
   {
     "question_number": 75,
-    "question_text": "A security analyst is reviewing the following log:\n[Image of log entries showing Time, File type, Size, Antivirus status, Location.]\nWhich of the following possible events should the security analyst investigate further?",
+    "question_text": "A security analyst is reviewing the following log:\n\n| Time  | File type | Size | Antivirus status | Location                |\n| 11:25 | txt       | 25mb | block            | c:\\\\                     |\n| 11:27 | dll       | 10mb | allow            | c:\\\\temp                |\n| 11:29 | doc       | 37mb | block            | c:\\\\users\\\\user1\\\\Desktop |\n| 11:32 | pdf       | 13mb | allow            | c:\\\\users\\\\user2\\\\Downloads|\n| 11:35 | txt       | 49mb | allow            | c:\\\\users\\\\user3\\\\Documents|\n\nWhich of the following possible events should the security analyst investigate further?",
     "options": {
       "A": "A macro that was prevented from running",
       "B": "A text file containing passwords that were leaked",
@@ -1089,7 +1089,7 @@
   },
   {
     "question_number": 78,
-    "question_text": "A company receives several complaints from customers regarding its website. An engineer implements a parser for the web server logs that generates the following output:\n[Image of log entries showing Browser, User, Location, Load time, HTTP response.]\nWhich of the following should the company implement to best resolve the issue?",
+    "question_text": "A company receives several complaints from customers regarding its website. An engineer implements a parser for the web server logs that generates the following output:\n\nBrowser | User | Location | Load time | HTTP response\nMozilla 5.0 | Userl | United States | 150ms | 200\nChrome 114 | Userl | India | 3.2s | 302\nMicrosoft Edge | User2 | India | 2.7s | 302\nMicrosoft Edge | Userl | Australia | 6.4s | 200\n\nWhich of the following should the company implement to best resolve the issue?",
     "options": {
       "A": "IDS",
       "B": "CDN",
@@ -1103,7 +1103,7 @@
   },
   {
     "question_number": 79,
-    "question_text": "A company's security policy states that any publicly available server must be patched within 12 hours after a patch is released. A recent IIS zero-day vulnerability was discovered that affects all versions of the Windows Server OS:\n[Image of table showing Host, OS, Externally available?, Behind WAF?, IIS installed?]\nWhich of the following hosts should a security analyst patch first once a patch is available?",
+    "question_text": "A company's security policy states that any publicly available server must be patched within 12 hours after a patch is released. A recent IIS zero-day vulnerability was discovered that affects all versions of the Windows Server OS:\n\nHost | OS | Externally available? | Behind WAF? | IIS installed?\nHost 1 | Windows 2019 | Yes | No | Yes\nHost 2 | Windows 2008 R2 | No | N/A | Yes\nHost 3 | Windows 2012 R2 | Yes | Yes | Yes\nHost 4 | Windows 2022 | No | N/A | Yes\nHost 5 | Windows 2012 R2 | No | N/A | No\nHost 6 | Windows 2019 | Yes | No | No\n\nWhich of the following hosts should a security analyst patch first once a patch is available?",
     "options": {
       "A": "1",
       "B": "2",
@@ -1164,7 +1164,7 @@
   },
   {
     "question_number": 83,
-    "question_text": "A security analyst wants to use lessons learned from a poor incident response to reduce dwell time in the future. The analyst is using the following data points:\n[Image of table showing User, Site visited, Method, Filter status, Traffic status, Alert Status.]\nWhich of the following would the analyst most likely recommend?",
+    "question_text": "A security analyst wants to use lessons learned from a poor incident response to reduce dwell time in the future. The analyst is using the following data points:\n\nUser | Site visited | Method | Filter status | Traffic status | Alert Status\nUserl | compti.tools.com | GET | Allowed | Allowed | No\nUserl | mywiki.com | GET | Allowed | Allowed | Yes\nAccount2 | payroll.com | GET | Blocked | Blocked | No\nAccount2 | payroll.com | POST | Blocked | Blocked | No\nAccountl | 139.40.22.21 | POST | Allowed | Allowed | No\nAccount5 | payroll.com | GET | Allowed | Allowed | No\n\nWhich of the following would the analyst most likely recommend?",
     "options": {
       "A": "Adjusting the SIEM to alert on attempts to visit phishing sites",
       "B": "Allowing TRACE method traffic to enable better log correlation",
@@ -1233,7 +1233,7 @@
   },
   {
     "question_number": 88,
-    "question_text": "A company’s SIEM is designed to associate the company’s asset inventory with user events. Given the following report:\n[Image of report showing Hostname, Account, Attempted Logins, Failed Logins, Successful Logins.]\nWhich of the following should a security engineer investigate first as part of a log audit?",
+    "question_text": "A company’s SIEM is designed to associate the company’s asset inventory with user events. Given the following report:\n\nHostname | Account | Attempted Logins | Failed Logins | Successful Logins\nServer 1 | SalesUser | 3 | 0 | 3\nServer 2 | AccountingUser | 5 | 1 | 4\nServer 3 | IT | 1 | 0 | 1\nServer 4 | Administrator | 2 | 2 | 0\nServer 4 | HR User | 5 | 0 | 5\nServer 5 | Administrator | 0 | 0 | 0\n\nWhich of the following should a security engineer investigate first as part of a log audit?",
     "options": {
       "A": "An endpoint that is not submitting any logs",
       "B": "Potential activity indicating an attacker moving laterally in the network",
@@ -1275,7 +1275,7 @@
   },
   {
     "question_number": 91,
-    "question_text": "A building camera is remotely accessed and disabled from the remote console application during off-hours. A security analyst reviews the following logs:\n[Image of logs showing Date & Time, Public IP, Browser Info, Action.]\nWhich of the following actions should the analyst take to best mitigate the threat?",
+    "question_text": "A building camera is remotely accessed and disabled from the remote console application during off-hours. A security analyst reviews the following logs:\n\nDate & Time | Public IP | Browser Info | Action\n11 Dec 22:30:23 | 192.168.2.45 | Mozilla/5.0 (Windows NT 5.1) | Access granted to admin\n11 Dec 23:05:43 | 192.168.2.45 | Mozilla/5.0 (Windows NT 5.1) | Access granted to admin\n11 Dec 23:10:29 | 104.18.16.29 | Mozilla/5.0 (Linux x86_64) | Access granted to admin\n11 Dec 23:12:18 | 104.18.16.29 | Mozilla/5.0 (Linux x86_64) | Logoff\n12 Dec 00:05:43 | 104.18.16.29 | Mozilla/5.0 (Linux x86_64) | Access granted to admin\n\nWhich of the following actions should the analyst take to best mitigate the threat?",
     "options": {
       "A": "Implement WAF protection for the web application.",
       "B": "Upgrade the firmware on the camera.",
@@ -1399,7 +1399,7 @@
   },
   {
     "question_number": 100,
-    "question_text": "A user reports application access issues to the help desk. The help desk reviews the logs for the user:\n[Image of logs showing Time, Internal IP, Public IP, IP Geolocation, Application, and Action. Entries show access to VPN, Email, HR System from Toronto and Los Angeles at different times, with one HR System access attempt from Toronto being denied.]\nWhich of the following is most likely the reason for the issue?",
+    "question_text": "A user reports application access issues to the help desk. The help desk reviews the logs for the user:\n\nTime | Internal IP | Public IP | IP Geolocation | Application | Action\n8:47 p.m. | 192.168.1.5 | 104.18.16.29 | Toronto | VPN | Allow\n8:48 p.m. | 10.10.2.21 | 95.67.137.12 | Los Angeles | Email | Allow\n8:48 p.m. | 10.10.2.21 | 95.67.137.12 | Los Angeles | HR System | Allow\n8:49 p.m. | 10.10.2.21 | 95.67.137.12 | Los Angeles | Email | Allow\n8:52 p.m. | 192.168.1.5 | 104.18.16.29 | Toronto | HR System | Deny\n\nWhich of the following is most likely the reason for the issue?",
     "options": {
       "A": "The user inadvertently tripped the impossible travel security rule in the SSO system.",
       "B": "A threat actor has compromised the user's account and attempted to log in.",
@@ -1571,7 +1571,7 @@
   },
   {
     "question_number": 112,
-    "question_text": "A security analyst is reviewing the following event timeline from a COR solution:\n[Image of timeline showing Time, File name, File action, Action verdict.]\nWhich of the following most likely has occurred and needs to be fixed?",
+    "question_text": "A security analyst is reviewing the following event timeline from a COR solution:\n\nTime | File name | File action | Action verdict\n4:08 p.m. | hr-reporting.docx | File save | Allowed\n4:08 p.m. | hr-reporting.docx | Scan initiated | Pending\n4:10 p.m. | paychecks.xlsx | File execute | Allowed\n4:12 p.m. | hr-reporting.docx | Script | Allowed\n4:17 p.m. | hr-reporting.docx | Script | Allowed\n4:19 p.m. | hr-reporting.docx | Scan complete | Malware found\n4:20 p.m. | paychecks.xlsx | File edit | Allowed\n\nWhich of the following most likely has occurred and needs to be fixed?",
     "options": {
       "A": "The DLP has failed to block malicious exfiltration and data tagging is not being utilized properly",
       "B": "An EDR bypass was utilized by a threat actor and updates must be installed by the administrator.",
@@ -2087,22 +2087,6 @@
     "question_type": "multiple_choice_multiple_answer"
   },
   {
-    "question_number": 148,
-    "question_text": "Users are experiencing a variety of issues when trying to access corporate resources. Examples include:\n• Connectivity issues between local computers and file servers within branch offices\n• Inability to download corporate applications on mobile endpoints while working remotely\n• Certificate errors when accessing internal web applications\nWhich of the following actions are the most relevant when troubleshooting the reported issues? (Select two).",
-    "options": {
-      "A": "Review VPN throughput",
-      "B": "Check IPS rules",
-      "C": "Restore static content on lite CDN.",
-      "D": "Enable secure authentication using NAC",
-      "E": "Implement advanced WAF rules.",
-      "F": "Validate MDM asset compliance"
-    },
-    "correct_answer": "A F",
-    "explanation": "The reported issues suggest problems related to network connectivity, remote access, and certificate management:\nA. Review VPN throughput: Connectivity issues and the inability to download applications while working remotely may be due to VPN bandwidth or performance issues. Reviewing and optimizing VPN throughput can help resolve these problems by ensuring that remote users have adequate bandwidth for accessing corporate resources.\nF. Validate MDM asset compliance: Mobile Device Management (MDM) systems ensure that mobile endpoints comply with corporate security policies. Validating MDM compliance can help address issues related to the inability to download applications and certificate errors, as non-compliant devices might be blocked from accessing certain resources.\nB. Check IPS rules: While important for security, IPS rules are less likely to directly address the connectivity and certificate issues described.\nC. Restore static content on the CDN: This action is related to content delivery but does not address VPN or certificate-related issues.\nD. Enable secure authentication using NAC: Network Access Control (NAC) enhances security but does not directly address the specific issues described.\nE. Implement advanced WAF rules: Web Application Firewalls protect web applications but do not address VPN throughput or mobile device compliance.",
-    "is_simulation": false,
-    "question_type": "multiple_choice_multiple_answer"
-  },
-  {
     "question_number": 149,
     "question_text": "A product development team has submitted code snippets for review prior to release.\nINSTRUCTIONS\nAnalyze the code snippets, and then select one vulnerability, and one fix for each code snippet.\nCode Snippet 1:\n[Image showing Code Snippet 1: Java code interacting with a database using a Statement object constructed directly with a user-provided 'userid'.]\nCode Snippet 2:\n[Image showing Code Snippet 2: Python code creating a simple HTTP server and handling a GET request that takes a 'userid' parameter and performs an LDAP lookup.]\n[Image showing a list of potential Vulnerabilities: SQL injection, Cross-site request forgery, Server-side request forgery, Indirect object reference, Cross-site scripting.]\n[Image showing a list of potential Fixes: Perform input sanitization of the userid field., Perform output encoding of queryResponse, Ensure usex:ia belongs to logged-in user., Inspect URLS and disallow arbitrary requests., Implement anti-forgery tokens., Implement prepared statements and bind variables., Remove the serve_forever instruction., Prevent the \"authenticated\" value from being overridden by a GET parameter., HTTP POST should be used for sensitive parameters., Perform input sanitization of the userid field.]",
     "options": {},
@@ -2141,7 +2125,7 @@
   },
   {
     "question_number": 152,
-    "question_text": "A user submits a help desk ticket stating their account does not authenticate sometimes. An analyst reviews the following logs for the user:\n[Image of logs showing User, Source IP, Source Location, User assigned location, Satisfied MFA?, Sign-in status.]\nWhich of the following best explains the reason the user's access is being denied?",
+    "question_text": "A user submits a help desk ticket stating their account does not authenticate sometimes. An analyst reviews the following logs for the user:\n\nUser | Source IP | Source Location | User assigned location | Satisfied MFA? | Sign-in status\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nADMIN1 | 10.1.2.21 | France | France | Yes | Allowed\nFINANCE1 | Payroll | US | US | Unknown | Unknown\n\nWhich of the following best explains the reason the user's access is being denied?",
     "options": {
       "A": "Incorrectly typed password",
       "B": "Time-based access restrictions",
@@ -2299,7 +2283,7 @@
   },
   {
     "question_number": 163,
-    "question_text": "A security analyst is troubleshooting the reason a specific user is having difficulty accessing company resources. The analyst reviews the following information:\n[Image of table showing User, Source IP, Source Location, User assigned location, Satisfied MFA?, Sign-in status.]\nWhich of the following is most likely the cause of the issue?",
+    "question_text": "A security analyst is troubleshooting the reason a specific user is having difficulty accessing company resources. The analyst reviews the following information:\n\nUser | Source IP | Source Location | User assigned location | Satisfied MFA? | Sign-in status\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nSALES1 | 8.11.4.16 | Germany | France | Yes | Blocked\nADMIN1 | 10.1.2.21 | France | France | Yes | Allowed\nFINANCE1 | Payroll | US | US | Unknown | Unknown\n\nWhich of the following is most likely the cause of the issue?",
     "options": {
       "A": "The local network access has been configured to bypass MFA requirements.",
       "B": "A network geolocation is being misidentified by the authentication server",
@@ -2427,7 +2411,7 @@
   },
   {
     "question_number": 172,
-    "question_text": "A security analyst is reviewing suspicious log-in activity and sees the following data in the SIEM:\n[Image of SIEM data showing Account, Customer, Application, Authorization Level, Status, Risk.]\nWhich of the following is the most appropriate action for the analyst to take?",
+    "question_text": "A security analyst is reviewing suspicious log-in activity and sees the following data in the SIEM:\n\nAccount | Customer | Application | Authorization Level | Status | Risk\nADMIN | CORP.LOCAL | Payroll | Administrator | Failure | High\nSALES1 | CORP.LOCAL | CRM | User | Success | Low\nSALES1 | CORP.LOCAL | Payroll | User | Success | Low\nSALES1 | CORP.LOCAL | Email | User | Success | Low\nADMIN1 | CORP.LOCAL | Payroll | Administrator | Success | Low\nFINANCE1 | Payroll | Payroll | User | Unknown | Unknown\n\nWhich of the following is the most appropriate action for the analyst to take?",
     "options": {
       "A": "Update the log configuration settings on the directory server that is not being captured properly.",
       "B": "Have the admin account owner change their password to avoid credential stuffing.",
