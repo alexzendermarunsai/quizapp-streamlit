@@ -2681,7 +2681,7 @@
   },
   {
     "question_number": 4,
-    "question_text": "A security architect needs to enable a container orchestrator for DevSecOps and SOAR initiatives. The engineer has discovered that several Ansible YAML files used for the automation of configuration management have the following content:\n$ hostnamectl\nCOMPTIA001\n$ cat /etc/ansible/ansible.cfg\n[inventory]\nenable_plugins = kubernetes.core.k8s\n$ cat /etc/ansible/projects/roles/k8/default/main.yml\n---\n- Name: Create a Kubernetes Service Objects\n  kubernetes.core.k8s:\n    state: present\n    definition:\n      apiVersion: v2\n      kind: Service\n$ cat /etc/kubernetes/manifests\ninsecure-bind-address =localhost\"\nWhich of the following should the engineer do to correct the security issues presented within this content?",
+    "question_text": "A security architect needs to enable a container orchestrator for DevSecOps and SOAR initiatives. The engineer has discovered that several Ansible YAML files used for the automation of configuration management have the following content:\n`$` hostnamectl\nCOMPTIA001\n`$` cat /etc/ansible/ansible.cfg\n[inventory]\nenable_plugins = kubernetes.core.k8s\n`$` cat /etc/ansible/projects/roles/k8/default/main.yml\n---\n- Name: Create a Kubernetes Service Objects\n  kubernetes.core.k8s:\n    state: present\n    definition:\n      apiVersion: v2\n      kind: Service\n$ cat /etc/kubernetes/manifests\ninsecure-bind-address =localhost\"\nWhich of the following should the engineer do to correct the security issues presented within this content?",
     "options": {
       "A": "Update the kubernetes.core.k8s module to kubernetes.core.k8s_service in the main.yml file.",
       "B": "Update the COMPTIA001 hostname to localhost using the hostnamectl command.",
