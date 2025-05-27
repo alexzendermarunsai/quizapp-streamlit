@@ -2741,7 +2741,7 @@
   },
   {
     "question_number": 8,
-    "question_text": "A mobile administrator is reviewing the following mobile device DHCP logs to ensure the proper mobile settings are applied to managed devices:\nAssign,192.168.1.10,UserA-MobileDevice,0236FB12CA0B\nAssign,192.168.1.23,UserA-MobileDevice,0E6FACFAD9\nAssign,192.168.1.11,UserA-MobileDevice,BAC034EF9451\nAssign,192.168.1.33,UserA-MobileDevice,0E938663221B\nWhich of the following mobile configuration settings is the mobile administrator verifying?",
+    "question_text": "A mobile administrator is reviewing the following mobile device DHCP logs to ensure the proper mobile settings are applied to managed devices:\n10,10/18/2021,17:01:05,Assign,192.168.1.10,UserA-MobileDevice,0236FB12CA0B\n23,10/19/2021,07:11:19,Assign,192.168.1.23,UserA-MobileDevice,068ADIFAB109\n10,10/20/2021,19:22:56,Assign,192.168.1.96,UserA-MobileDevice,0ABC65E81AB0\n10,10/21/2021,22:34:15,Assign,192.168.1.33,UserA-MobileDevice,BAC034EF9451\n10,10/22/2021,11:55:41,Assign,192.168.1.12,UserA-MobileDevice,0E938663221B\nWhich of the following mobile configuration settings is the mobile administrator verifying?",
     "options": {
       "A": "Service set identifier authentication",
       "B": "Wireless network auto joining",
@@ -2749,7 +2749,7 @@
       "D": "Association MAC address randomization"
     },
     "correct_answer": "D",
-    "explanation": "The DHCP logs show multiple MAC addresses (e.g., 0236FB12CA0B, 0E6FACFAD9, BAC034EF9451, 0E938663221B) associated with the same mobile device (UserA-MobileDevice). This behavior, where a device uses different MAC addresses over time or per network, is characteristic of MAC address randomization. Mobile operating systems, such as iOS and Android, implement MAC address randomization to enhance user privacy by making it more difficult to track a device's location across different Wi-Fi networks.",
+    "explanation": "The DHCP logs show multiple MAC addresses (e.g., 0236FB12CA0B, 068ADIFAB109, 0ABC65E81AB0, 0E938663221B) associated with the same mobile device (UserA-MobileDevice). This behavior, where a device uses different MAC addresses over time or per network, is characteristic of MAC address randomization. Mobile operating systems, such as iOS and Android, implement MAC address randomization to enhance user privacy by making it more difficult to track a device's location across different Wi-Fi networks.",
     "is_simulation": false,
     "question_type": "multiple_choice_single_answer"
   },
