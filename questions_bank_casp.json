@@ -2901,7 +2901,7 @@
   },
   {
     "question_number": 19,
-    "question_text": "A programmer is reviewing the following proprietary piece of code that was identified as a vulnerability due to users being authenticated when they provide incorrect credentials:\nWhich of the following should the programmer implement to remediate the code vulnerability?",
+    "question_text": "A programmer is reviewing the following proprietary piece of code that was identified as a vulnerability due to users being authenticated when they provide incorrect credentials:\nGET USERID\nGET PASS\nJUMP TO :ALLOWUSER:\nIF USERID == GETDBUSER(USERID) AND HASH(PASS) == GETDBPASS(USERID)\nEXIT\n:ALLOWUSER:\nSET USERACL(USERID)\n...\n...\n...\nWhich of the following should the programmer implement to remediate the code vulnerability?",
     "options": {
       "A": "Salted hashing via the proprietary SHASH function",
       "B": "Input validation in the first two lines of code",
