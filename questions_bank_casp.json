@@ -2887,7 +2887,7 @@
   },
   {
     "question_number": 18,
-    "question_text": "A security technician is investigating a system that tracks inventory via a batch update each night. The technician is concerned that the system poses a risk to the business, as errors are occasionally generated and reported inventory appears incorrect. The following output log is provided:\nStarting Boxes = 20\nTransaction | Operation | Running total\n1 | + 10 | 30\n2 | + 30 | 50\n3 | + 10 | 60\n4 | - 10 | 50\n5 | - 40 | (below zero\nbalance) =10\n6 | + 30 | 20\n7 | + 10 | 60\n8 | + 40 | 60\nThe technician reviews the output of the batch job and discovers that the inventory was never less than zero, and the final inventory was 100 rather than 60. Which of the following should the technician do to resolve this issue?",
+    "question_text": "A security technician is investigating a system that tracks inventory via a batch update each night. The technician is concerned that the system poses a risk to the business, as errors are occasionally generated and reported inventory appears incorrect. The following output log is provided:\nStarting Boxes = 20\nTransaction | Operation | Running total\n1 | + 10 | 30\n2 | + 30 | 50\n3 | + 10 | 60\n4 | - 10 | 50\n5 | - 40 | (below zero balance) = -10\n6 | + 30 | 20\n7 | + 10 | 60\n8 | + 40 | 60\nThe technician reviews the output of the batch job and discovers that the inventory was never less than zero, and the final inventory was 100 rather than 60. Which of the following should the technician do to resolve this issue?",
     "options": {
       "A": "Ensure that the application is using memory-safe functions to prevent integer overflows.",
       "B": "Recommend thread-safe processes in the code to eliminate race conditions.",
